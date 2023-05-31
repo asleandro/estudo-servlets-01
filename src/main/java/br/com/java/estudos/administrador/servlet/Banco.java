@@ -3,6 +3,7 @@ package br.com.java.estudos.administrador.servlet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Banco {
 
@@ -28,12 +29,18 @@ public class Banco {
 	}
 
 	public void remove(Integer id) {
-		Iterator<Empresa> it = lista.iterator();
+		
+		Empresa e = lista.stream().filter(empr -> empr.getId() == id)
+				.collect(Collectors.toList()).get(0);
+		lista.remove(e);
+		
+		/*Iterator<Empresa> it = lista.iterator();
 		
 		while(it.hasNext()) {
 			Empresa emp = it.next();
 			if (emp.getId() == id) it.remove();
 		}
+		*/
 	}
 
 	public List<Empresa> getEmpresas() {
